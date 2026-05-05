@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+
+  <a class="navbar-brand">Sistema Académico</a>
+
+  <div class="ms-auto">
+
+    <!-- 🔐 Botón Login -->
+    <a routerLink="/" class="btn btn-outline-light me-2">
+      Login
+    </a>
+
+    <!-- 📝 Botón Registro -->
+    <a routerLink="/register" class="btn btn-success">
+      Registrarse
+    </a>
+
+    <!-- Botón Deslogin -->
+
+    <a (click)="logout()" class="btn btn-danger">
+      Cerrar sesión
+    </a>
+
+  </div>
+
+</nav>

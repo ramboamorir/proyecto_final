@@ -1,0 +1,211 @@
+<div class="container mt-4">
+
+  <!-- ===================== -->
+  <!-- FORMULARIO -->
+  <!-- ===================== -->
+  <div class="card shadow-lg mb-4">
+
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        {{ isEditing ? 'Actualizar Estudiante' : 'Registrar Estudiante' }}
+      </h4>
+    </div>
+
+    <div class="card-body">
+
+      <form class="row g-3" (ngSubmit)="createStudent()" #form="ngForm">
+
+        <!-- Código -->
+        <div class="col-md-3">
+          <label>Código</label>
+          <input type="number"
+                 class="form-control"
+                 [(ngModel)]="newStudent.code"
+                 name="code"
+                 required>
+        </div>
+
+        <!-- Nombre -->
+        <div class="col-md-4">
+          <label>Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newStudent.name"
+                 name="name"
+                 required>
+        </div>
+
+        <!-- Apellido -->
+        <div class="col-md-4">
+          <label>Apellido</label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newStudent.lastname"
+                 name="lastname"
+                 required>
+        </div>
+
+        <!-- Edad -->
+        <div class="col-md-2">
+          <label>Edad</label>
+          <input type="number"
+                 class="form-control"
+                 [(ngModel)]="newStudent.age"
+                 name="age"
+                 required>
+        </div>
+
+        <!-- Curso -->
+        <div class="col-md-4">
+          <label>Curso Academico</label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newStudent.course"
+                 name="course"
+                 required>
+        </div>
+
+        <!-- Nota -->
+        <div class="col-md-2">
+          <label>Nota</label>
+          <input type="number"
+                 class="form-control"
+                 [(ngModel)]="newStudent.note"
+                 name="note"
+                 required>
+        </div>
+
+        <!-- Docente -->
+        <div class="col-md-4">
+          <label>Docente</label>
+
+          <select class="form-control"
+                  [(ngModel)]="newStudent.code_teacher"
+                  name="code_teacher"
+                  required>
+
+            @for (d of teachers; track d._id) {
+              <option [value]="d.code">
+                {{ d.name }}
+              </option>
+            }
+
+          </select>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="col-12 text-end">
+
+          <button type="submit"
+                  class="btn"
+                  [ngClass]="isEditing ? 'btn-warning' : 'btn-success'"
+                  [disabled]="form.invalid || loading">
+
+            {{ loading
+              ? (isEditing ? 'Actualizando...' : 'Guardando...')
+              : (isEditing ? 'Actualizar' : 'Guardar') }}
+
+          </button>
+
+          <button type="button"
+                  class="btn btn-secondary mx-2"
+                  (click)="resetForm()">
+            Limpiar
+          </button>
+
+          <button type="button"
+                  class="btn btn-info"
+                  (click)="refresh()">
+            Refrescar
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- LISTADO -->
+  <!-- ===================== -->
+
+  <div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Lista de Estudiantes</h5>
+    </div>
+
+    <div class="card-body">
+
+      @if (students.length === 0) {
+        <div class="alert alert-info text-center">
+          No hay estudiantes registrados
+        </div>
+      }
+
+      @if (students.length > 0) {
+
+        <div class="table-responsive">
+
+          <table class="table table-hover table-striped">
+
+            <thead class="table-dark">
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Edad</th>
+                <th>Curso Academico</th>
+                <th>Nota</th>
+                <th>Docente</th>
+                <th>Jornada</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (est of students; track est.code) {
+                <tr>
+                  <td>{{ est.code }}</td>
+                  <td>{{ est.name }}</td>
+                  <td>{{ est.lastname }}</td>
+                  <td>{{ est.age }}</td>
+                  <td>{{ est.course }}</td>
+                  <td>{{ est.note }}</td>
+                  <td>
+                    {{ teacherMap[est.code_teacher] || '' }}
+                  </td>
+                  <td>
+                    {{ teacherMapWorksday[est.code_teacher] || '' }}
+                  </td>
+
+                  <td>
+                    <button class="btn btn-warning btn-sm me-2"
+                            (click)="editStudent(est)">
+                      Editar
+                    </button>
+
+                    <button class="btn btn-danger btn-sm"
+                            (click)="deleteStudent(est.code)">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,188 @@
+<div class="container mt-4">
+
+  <!-- ===================== -->
+  <!-- FORMULARIO -->
+  <!-- ===================== -->
+  <div class="card shadow-lg mb-4">
+
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">
+        {{ isEditing ? 'Actualizar Docente' : 'Registrar Docente' }}
+      </h4>
+    </div>
+
+    <div class="card-body">
+
+      <form class="row g-3" (ngSubmit)="createTeacher()" #form="ngForm">
+
+        <!-- Código -->
+        <div class="col-md-3">
+          <label>Código</label>
+          <input type="number"
+                 class="form-control"
+                 [(ngModel)]="newTeacher.code"
+                 name="code"
+                 required>
+        </div>
+
+        <!-- Nombre -->
+        <div class="col-md-4">
+          <label>Nombre</label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newTeacher.name"
+                 name="name"
+                 required>
+        </div>
+
+        <!-- Apellido -->
+        <div class="col-md-4">
+          <label>Apellido</label>
+          <input type="text"
+                 class="form-control"
+                 [(ngModel)]="newTeacher.lastname"
+                 name="lastname"
+                 required>
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-4">
+          <label>Email</label>
+          <input type="email"
+                 class="form-control"
+                 [(ngModel)]="newTeacher.email"
+                 name="email"
+                 required>
+        </div>
+
+        <!-- Password -->
+        <div class="col-md-4">
+          <label>Password</label>
+          <input type="password"
+                 class="form-control"
+                 [(ngModel)]="newTeacher.password"
+                 name="password">
+        </div>
+
+        <!-- Jornada -->
+        <div class="col-md-4">
+          <label>Jornada</label>
+          <select class="form-control"
+                  [(ngModel)]="newTeacher.worksday"
+                  name="worksday"
+                  required>
+            <option value="">Seleccione</option>
+            <option value="Mañana">Mañana</option>
+            <option value="Tarde">Tarde</option>
+            <option value="Noche">Noche</option>
+          </select>
+        </div>
+
+        <!-- BOTONES -->
+        <div class="col-12 text-end">
+
+          <button type="submit"
+                  class="btn"
+                  [ngClass]="isEditing ? 'btn-warning' : 'btn-success'"
+                  [disabled]="form.invalid || loading">
+
+            {{ loading
+              ? (isEditing ? 'Actualizando...' : 'Guardando...')
+              : (isEditing ? 'Actualizar' : 'Guardar') }}
+
+          </button>
+
+          <button type="button"
+                  class="btn btn-secondary mx-2"
+                  (click)="resetForm()">
+            Limpiar
+          </button>
+
+          <button type="button"
+                  class="btn btn-info"
+                  (click)="refresh()">
+            Refrescar
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!-- LISTADO -->
+  <!-- ===================== -->
+
+  <div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">Lista de Docentes</h5>
+    </div>
+
+    <div class="card-body">
+
+      @if (teachers.length === 0) {
+        <div class="alert alert-info text-center">
+          No hay docentes registrados
+        </div>
+      }
+
+      @if (teachers.length > 0) {
+
+        <div class="table-responsive">
+
+          <table class="table table-hover table-striped">
+
+            <thead class="table-dark">
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Jornada</th>
+                <th>Estudiantes</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (doc of teachers; track doc._id) {
+                <tr>
+                  <td>{{ doc.code }}</td>
+                  <td>{{ doc.name }}</td>
+                  <td>{{ doc.lastname }}</td>
+                  <td>{{ doc.email }}</td>
+                  <td>{{ doc.worksday }}</td>
+                  <td>
+                    {{ teacherCountMap[doc.code] || 0 }}
+                  </td>
+                  <td>
+                    <button class="btn btn-warning btn-sm me-2"
+                            (click)="editTeacher(doc)">
+                      Editar
+                    </button>
+
+                    <button class="btn btn-danger btn-sm"
+                            (click)="deleteTeacher(doc.code)">
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              }
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  </div>
+
+</div>
