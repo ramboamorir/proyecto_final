@@ -10,20 +10,22 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    provideHttpClient(withInterceptors([(req, next) => {
-        const token = localStorage.getItem('token');
+    provideHttpClient(
+      withInterceptors([
+        (req, next) => {
+          const token = localStorage.getItem('token');
 
-        if (token) {
-          req = req.clone({
-            setHeaders: {
-              Authorization: `Bearer ${token}`
-            }
-          });
-        }
+          if (token) {
+            req = req.clone({
+              setHeaders: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          }
 
-        return next(req);
-      }
-    ]))
+          return next(req);
+        },
+      ]),
+    ),
   ],
 };
-
