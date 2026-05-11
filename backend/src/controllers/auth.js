@@ -78,7 +78,7 @@ export const login = async (req, res) => {
   try {
 
     const { email, password } = req.body;
-    
+
 
     if (!email || !password) {
       return res.status(400).json({
@@ -86,7 +86,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email }).select('+password');
 
     // console.log("USER FROM DB:", user);
 
@@ -131,5 +131,5 @@ export const login = async (req, res) => {
     console.error("ERROR LOGIN:", error);
     res.status(500).json({ message: error.message });
   }
-  
+
 };
