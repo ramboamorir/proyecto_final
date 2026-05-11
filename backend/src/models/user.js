@@ -32,7 +32,7 @@ const userSchema = new Schema({
 
 },
 
-{ versionKey: false, timeseries: true },
+{ versionKey: false, timestamps: true },
 );
 
 // userSchema.methods.comparePassword = async function (password) {

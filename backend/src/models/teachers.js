@@ -40,7 +40,7 @@ const teacherModel = new Schema({
         select: false,
     },
 },
-    { versionKey: false, timeseries: true },
+    { versionKey: false, timestamps: true },
 );
 
 export default model('Teacher', teacherModel);

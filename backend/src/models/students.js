@@ -46,7 +46,7 @@ const studentSchema = new Schema(
             require: true,
         },
     },
-        {versionKey: false, timeseries: true},
+        {versionKey: false, timestamps: true},
 );
 
 export default model('Student' , studentSchema);
