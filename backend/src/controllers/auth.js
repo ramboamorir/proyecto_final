@@ -39,6 +39,8 @@ const generateToken = (user) => {
 // };
 
 export const register = async (req, res) => {
+  console.log("🚀 REGISTER ENTRÓ");
+  console.log(req.body);
   try {
 
     const { name, email, password, role } = req.body;
@@ -66,16 +68,8 @@ export const register = async (req, res) => {
       message: "Usuario creado"
     });
 
-  }catch (error) {
-
-    console.error("🔥 REGISTER ERROR:");
-    console.error(error);
-
-    res.status(500).json({
-      message: error.message,
-      stack: error.stack
-    });
-
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
