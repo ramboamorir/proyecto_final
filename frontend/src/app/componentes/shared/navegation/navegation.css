@@ -1,0 +1,27 @@
+.navigation-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.nav-btn {
+  min-width: 220px;
+  padding: 0.85rem 2rem;
+  border-radius: 50px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.nav-btn.active {
+  transform: scale(1.03);
+}

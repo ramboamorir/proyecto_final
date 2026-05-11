@@ -1,1 +1,241 @@
 /* You can add global styles to this file, and also import other style files */
+/* ==========================================================
+   PALETA DE COLORES Y ESTILOS GLOBALES
+========================================================== */
+
+:root {
+  --primary-color: #1e3a8a;
+  /* Azul institucional */
+  --primary-light: #3b82f6;
+  /* Azul claro */
+  --secondary-color: #0f172a;
+  /* Azul oscuro */
+  --success-color: #10b981;
+  /* Verde suave */
+  --danger-color: #ef4444;
+  /* Rojo suave */
+  --warning-color: #f59e0b;
+  /* Amarillo elegante */
+  --background-color: #f8fafc;
+  /* Fondo general */
+  --card-color: #ffffff;
+  /* Tarjetas */
+  --text-color: #1f2937;
+  /* Texto principal */
+  --muted-color: #6b7280;
+  /* Texto secundario */
+  --border-color: #e5e7eb;
+  /* Bordes suaves */
+  --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 12px 24px rgba(15, 23, 42, 0.08);
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --transition: all 0.3s ease;
+}
+
+/* ==========================================================
+   ESTILOS BASE
+========================================================== */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.45), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.12), transparent 40%),
+    linear-gradient(135deg,
+      #1e3a8a 0%,
+      #eff6ff 45%,
+      #d1fae5 100%);
+
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1200px;
+}
+
+/* ==========================================================
+   TARJETAS Y TABLAS
+========================================================== */
+
+.card {
+  border: none !important;
+  border-radius: var(--radius-xl) !important;
+  box-shadow: var(--shadow-md) !important;
+  overflow: hidden;
+}
+
+.card-header {
+  background: linear-gradient(135deg,
+      var(--primary-color),
+      var(--primary-light)) !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 1.25rem 1.5rem !important;
+}
+
+.card-body {
+  padding: 1.5rem !important;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  border-bottom: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.table tbody tr {
+  transition: var(--transition);
+}
+
+.table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+/* ==========================================================
+   BOTONES
+========================================================== */
+
+.btn {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  padding: 0.65rem 1.5rem !important;
+  transition: var(--transition) !important;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge {
+  border-radius: 999px;
+  padding: 0.45rem 0.75rem;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 1rem !important;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ===========================================================
+  MODO OSCURO
+=============================================================*/
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.45), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.12), transparent 40%),
+    linear-gradient(135deg,
+      #1e3a8a 0%,
+      #eff6ff 45%,
+      #d1fae5 100%);
+
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* capa de suavizado */
+body.dark-mode::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: -1;
+}
+
+.card {
+  background: var(--card-color);
+  color: var(--text-color);
+  border-radius: 12px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+/* =================================================
+  MODO TIPOGRAFIA
+=================================================*/
+
+:root {
+  --font-size-base: 16px;
+}
+
+body {
+  font-size: var(--font-size-base);
+  transition: font-size 0.2s ease;
+}
+
+.font-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  gap: 10px;
+
+  background: var(--card-color);
+  padding: 10px;
+  border-radius: 14px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.font-btn {
+  border: none;
+  cursor: pointer;
+
+  background: var(--primary-color);
+  color: white;
+
+  font-size: calc(var(--font-size-base) - 2px);
+  font-weight: 600;
+
+  padding: 8px 14px;
+  border-radius: 10px;
+
+  transition: all 0.3s ease;
+}
+
+.font-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.font-btn.reset {
+  background: #576574;
+}

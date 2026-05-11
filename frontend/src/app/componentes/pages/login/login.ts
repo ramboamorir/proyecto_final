@@ -43,6 +43,7 @@ export class Login {
     this.loading = true;
 
     console.log('LOGIN PAYLOAD:', this.user); // 🧪 DEBUG
+    console.log('ROL GUARDADO EN LOCALSTORAGE:', this.authService.getRole());
 
     this.authService.login(this.user).subscribe({
 

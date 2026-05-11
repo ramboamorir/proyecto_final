@@ -27,3 +27,16 @@
     <span class="carousel-control-next-icon"></span>
   </button>
 </div>
+
+<button class="theme-toggle" (click)="toggleTheme()">
+  {{ isDark ? '☀️ Modo Claro' : '🌙 Modo Oscuro' }}
+</button>
+
+<div class="font-controls">
+  <button class="font-btn" (click)="decreaseFont()">A-</button>
+
+  <button class="font-btn reset" (click)="resetFont()">🔄</button>
+
+  <button class="font-btn" (click)="increaseFont()">A+</button>
+</div>
+

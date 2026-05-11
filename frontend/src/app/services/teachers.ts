@@ -7,7 +7,8 @@ import { Injectable } from '@angular/core';
 
 export class teachersServices {
 
-  private api = 'http://localhost:3000/docentes';
+  // private api = 'http://localhost:3000/docentes';
+  private api = 'http://3.15.171.46:3000/docentes';
 
   constructor(private http: HttpClient) {}
 

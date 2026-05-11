@@ -1,0 +1,67 @@
+.custom-navbar {
+  background: linear-gradient(90deg, #1e3a8a, #2563eb);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+.btn {
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+/* ===== LIGHT MODE (default) ===== */
+:root {
+  --bg-color: #f5f6fa;
+  --text-color: #2f3640;
+  --card-color: #ffffff;
+  --primary-color: #4a69bd;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  --bg-color: #1e272e;
+  --text-color: #f5f6fa;
+  --card-color: #2f3640;
+  --primary-color: #00a8ff;
+}
+
+/* ===== APLICACIÓN GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* Ejemplo de cards */
+.card {
+  background: var(--card-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Botón toggle */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  opacity: 0.85;
+}

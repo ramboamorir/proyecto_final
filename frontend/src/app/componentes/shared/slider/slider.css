@@ -1,0 +1,164 @@
+/* ==========================================================
+   SLIDER ACADÉMICO
+   Separado visualmente del contenido superior
+========================================================== */
+
+:host {
+  display: block;
+  margin-top: 3rem;        /* Espacio respecto al contenido anterior */
+  margin-bottom: 4rem;     /* Espacio antes del footer */
+  padding: 0 1rem;
+}
+
+/* Contenedor principal del slider */
+.slider-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Carrusel */
+.carousel {
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow:
+    0 20px 40px rgba(15, 23, 42, 0.12),
+    0 8px 16px rgba(15, 23, 42, 0.06);
+  background: #ffffff;
+}
+
+/* Imágenes */
+.carousel-item img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.92);
+}
+
+/* Oscurecer ligeramente para resaltar textos */
+.carousel-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.35),
+    rgba(15, 23, 42, 0.05)
+  );
+  pointer-events: none;
+}
+
+/* Controles laterales */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 8%;
+  opacity: 0.9;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-size: 65%;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: rgba(15, 23, 42, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+/* Indicadores inferiores */
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 0 6px;
+  border: none;
+  opacity: 0.6;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+/* Texto opcional del slider */
+.carousel-caption {
+  bottom: 2.5rem;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  :host {
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding: 0 0.75rem;
+  }
+
+  .carousel {
+    border-radius: 1.25rem;
+  }
+
+  .carousel-item img {
+    height: 240px;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+/* ===== LIGHT MODE (default) ===== */
+:root {
+  --bg-color: #f5f6fa;
+  --text-color: #2f3640;
+  --card-color: #ffffff;
+  --primary-color: #4a69bd;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  --bg-color: #1e272e;
+  --text-color: #f5f6fa;
+  --card-color: #2f3640;
+  --primary-color: #00a8ff;
+}
+
+/* ===== APLICACIÓN GLOBAL ===== */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* Ejemplo de cards */
+.card {
+  background: var(--card-color);
+  color: var(--text-color);
+  padding: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+/* Botón toggle */
+.theme-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  opacity: 0.85;
+}

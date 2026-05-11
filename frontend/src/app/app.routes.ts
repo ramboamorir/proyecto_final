@@ -4,26 +4,52 @@ import { Login } from './componentes/pages/login/login';
 import { Register } from './componentes/pages/register/register';
 import { Teachers } from './componentes/pages/teachers/teachers';
 import { Students } from './componentes/pages/students/students';
+
 import { AuthGuard } from './guards/auth-guard';
 import { RoleGuard } from './guards/role-guard';
 
 export const routes: Routes = [
-
-  // 🔐 Autenticación
+  // =========================
+  // AUTENTICACIÓN
+  // =========================
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: Login, title:'Login' },
-  { path: 'register', component: Register, title:'Registro' },
+  { path: 'login', component: Login, title: 'Login' },
+  { path: 'register', component: Register, title: 'Registro' },
 
-  // 📊 Módulos principales 🔥 activar guards
+  // =========================
+  // DOCENTES
+  // Acceso permitido para:
+  // - admin
+  // - user
+  // =========================
   {
-    path: 'docentes', component: Teachers, canActivate: [AuthGuard, RoleGuard],
+    path: 'docentes',
+    component: Teachers,
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      roles: ['admin', 'user'],
+    },
+    title: 'Docentes',
   },
 
+  // =========================
+  // ESTUDIANTES
+  // Acceso permitido para:
+  // - admin
+  // - user
+  // =========================
   {
-    path: 'estudiantes', component: Students, canActivate: [AuthGuard, RoleGuard],
+    path: 'estudiantes',
+    component: Students,
+    canActivate: [AuthGuard, RoleGuard],
+    data: {
+      roles: ['admin', 'user'],
+    },
+    title: 'Estudiantes',
   },
 
-  // 🔄 Ruta por defecto
-  { path: '**', redirectTo: '' }
-
-]
+  // =========================
+  // RUTA NO ENCONTRADA
+  // =========================
+  { path: '**', redirectTo: 'login' },
+];

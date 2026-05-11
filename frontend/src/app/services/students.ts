@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class studentsServices {
 
-  private api = 'http://localhost:3000/estudiantes'; // ajusta si tu backend usa /students o /estudiantes
+  // private api = 'http://localhost:3000/estudiantes'; // ajusta si tu backend usa /students o /estudiantes
+  private api = 'http://3.15.171.46:3000/estudiantes'; // ajusta si tu backend usa /students o /estudiantes
 
   constructor(private http: HttpClient) {}
 

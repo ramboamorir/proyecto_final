@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { teachersServices } from '../../../services/teachers';
 import { studentsServices } from '../../../services/students';
+import { AuthService } from '../../../services/auth';
 
 @Component({
   selector: 'app-teachers',
@@ -29,25 +30,46 @@ export class Teachers {
 
   constructor(
   private teachersService: teachersServices,
-  private studentsService: studentsServices
+  private studentsService: studentsServices,
+  public authService: AuthService
 ) {
-  this.getTeachers();
-  this.getStudents(); // 👈 importante
+  if (this.authService.canViewAcademicModules()) {
+    this.getTeachers();
+    this.getStudents();
+  }
 }
+
 
   // =========================
   // GET
   // =========================
+  // getTeachers() {
+  //   this.teachersService.getAll().subscribe({
+  //     next: (res: any) => {
+  //       const data = res?.data ?? res?.teachers ?? res;
+  //       this.teachers = Array.isArray(data) ? data : [data];
+  //       console.log('RESPUESTA BACKEND:', data);
+  //     },
+  //     error: (err) => console.error(err)
+  //   });
+  // }
   getTeachers() {
-    this.teachersService.getAll().subscribe({
-      next: (res: any) => {
-        const data = res?.data ?? res?.teachers ?? res;
-        this.teachers = Array.isArray(data) ? data : [data];
-        console.log('RESPUESTA BACKEND:', data);
-      },
-      error: (err) => console.error(err)
-    });
-  }
+  this.teachersService.getAll().subscribe({
+    next: (res: any) => {
+      const data = res?.data ?? res?.teachers ?? res;
+      const teachersArray = Array.isArray(data) ? data : [data];
+
+      // Si tu colección ya contiene solo docentes, puedes dejar esta línea.
+      // Si contiene otros roles, filtra así:
+      this.teachers = teachersArray.filter(
+        teacher => teacher.role === 'Docente' || !teacher.role
+      );
+
+      console.log('RESPUESTA BACKEND:', this.teachers);
+    },
+    error: (err) => console.error(err)
+  });
+}
 
   getStudents() {
     this.studentsService.getAll().subscribe({
@@ -186,6 +208,14 @@ export class Teachers {
     return this.students.filter(
       s => s.code_teacher?._id === teacherId || s.code_teacher === teacherId
     ).length;
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
+  get isUser(): boolean {
+    return this.authService.isUser();
   }
 
 }
