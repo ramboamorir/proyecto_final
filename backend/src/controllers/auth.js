@@ -66,8 +66,16 @@ export const register = async (req, res) => {
       message: "Usuario creado"
     });
 
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+  }catch (error) {
+
+    console.error("🔥 REGISTER ERROR:");
+    console.error(error);
+
+    res.status(500).json({
+      message: error.message,
+      stack: error.stack
+    });
+
   }
 };
 
